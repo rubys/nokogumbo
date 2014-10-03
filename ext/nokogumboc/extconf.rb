@@ -7,8 +7,9 @@ if have_library('xml2', 'xmlNewDoc')
 
   # nokogiri configuration from gem install
   nokogiri_lib = Gem.find_files('nokogiri').
-    select { |name| name.include? 'lib/nokogiri' }.
-    sort_by {|name| name[/nokogiri-([\d.]+)/,1].split('.').map(&:to_i)}.last
+    sort_by { |name|
+      name.match(%r{gems/nokogiri-([\d.]+)/lib/nokogiri}) ? Regexp.last_match[1].split('.').map(&:to_i) : [0, 0, 0]
+    }.last
   if nokogiri_lib
     nokogiri_ext = nokogiri_lib.sub(%r(lib/nokogiri(.rb)?$), 'ext/nokogiri')
 
