@@ -19,6 +19,11 @@ if have_library('xml2', 'xmlNewDoc')
 
     # if found, enable direct calls to Nokogiri (and libxml2)
     $CFLAGS += ' -DNGLIB' if find_header('nokogiri.h', nokogiri_ext)
+
+    if File.exists?("/etc/gentoo-release")
+      # link to the library to prevent: nokogumbo.c:(.text+0x26a): undefined reference to `Nokogiri_wrap_xml_document'
+      $LDFLAGS += " -L/ -l:#{nokogiri_ext}/nokogiri.so"
+    end
   end
 end
 
