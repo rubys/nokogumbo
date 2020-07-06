@@ -63,11 +63,14 @@ have_ng = false
 if !prohibited
   if Nokogiri::VERSION_INFO.include?('libxml') and
      Nokogiri::VERSION_INFO['libxml']['source'] == 'packaged'
-    # Nokogiri has libxml2 built in. Find the headers.
-    libxml2_path = File.join(Nokogiri::VERSION_INFO['libxml']['libxml2_path'],
-                             'include/libxml2')
-    if find_header('libxml/tree.h', libxml2_path)
-      have_libxml2 = true
+    # Nokogiri >= 1.11.0 dropped support for libxml12_path
+    if Nokogiri::VERSION_INFO['libxml']['libxml2_path']
+      # Nokogiri has libxml2 built in. Find the headers.
+      libxml2_path = File.join(Nokogiri::VERSION_INFO['libxml']['libxml2_path'],
+                               'include/libxml2')
+      if find_header('libxml/tree.h', libxml2_path)
+        have_libxml2 = true
+      end
     else
       # Unfortunately, some versions of Nokogiri delete these files.
       # https://github.com/sparklemotion/nokogiri/pull/1788
