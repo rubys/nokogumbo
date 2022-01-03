@@ -1,5 +1,15 @@
 # Nokogumbo - a Nokogiri interface to the Gumbo HTML5 parser.
 
+## NOTICE: End of life
+
+Nokogumbo has been merged into Nokogiri v1.12.0. Please update to Nokogiri v1.12.0 or later, and remove Nokogumbo as an explicit dependency.
+
+Please note that the final release of Nokogumbo, v2.0.5 (2021-03-19), will not support Ruby 3.2.0 and later. For Ruby 3.2 support, please upgrade to Nokogiri v1.12.0 or later and remove Nokogumbo as an explicit dependency.
+
+-----
+
+## Summary
+
 Nokogumbo provides the ability for a Ruby program to invoke 
 [our version of the  Gumbo HTML5 parser](https://github.com/rubys/nokogumbo/tree/master/gumbo-parser/src)
 and to access the result as a
