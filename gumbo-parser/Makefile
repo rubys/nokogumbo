@@ -14,7 +14,7 @@ LDFLAGS := -pthread
 all: check
 
 src/%.c: src/%.rl
-	ragel -F1 -o $@ $<
+	ragel -e -G2 -o $@ $<
 
 build/src:
 	mkdir -p $@
